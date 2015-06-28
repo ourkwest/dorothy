@@ -3,22 +3,27 @@
            (java.awt.image BufferedImage)))
 
 
-(def system-tray (when (SystemTray/isSupported) (SystemTray/getSystemTray)))
+(def ^:private system-tray (when (SystemTray/isSupported) (SystemTray/getSystemTray)))
 
-(def icon-size (let [dimension (.getTrayIconSize system-tray)
-                     width (int (.getWidth dimension))
-                     height (int (.getHeight dimension))
-                     inset 2]
-                 [width height inset]))
+(def ^:private icon-size (let [dimension (.getTrayIconSize system-tray)
+                               width (int (.getWidth dimension))
+                               height (int (.getHeight dimension))
+                               inset 3]
+                           [width height inset]))
 
-(def empty-image
+(defn- make-image [colour]
   (let [[width height inset] icon-size
         image (BufferedImage. width height BufferedImage/TYPE_INT_ARGB)
         graphics (.getGraphics image)]
     (.setRenderingHint graphics RenderingHints/KEY_ANTIALIASING RenderingHints/VALUE_ANTIALIAS_ON)
+    (.setColor graphics colour)
+    (.fillArc graphics inset inset (- width inset inset) (- height inset inset) 0 360)
     (.setColor graphics Color/BLACK)
     (.drawArc graphics inset inset (- width inset inset) (- height inset inset) 0 360)
     image))
+
+(def ^:private empty-image
+  (make-image (Color. 0 0 0 0)))
 
 (defprotocol Dot
   (paint [Dot colour])
@@ -27,15 +32,7 @@
 (deftype Dorothy [icon]
   Dot
   (paint [_ colour]
-    (let [[width height inset] icon-size
-          image (BufferedImage. width height BufferedImage/TYPE_INT_ARGB)
-          graphics (.getGraphics image)]
-      (.setRenderingHint graphics RenderingHints/KEY_ANTIALIASING RenderingHints/VALUE_ANTIALIAS_ON)
-      (.setColor graphics colour)
-      (.fillArc graphics inset inset (- width inset inset) (- height inset inset) 0 360)
-      (.setColor graphics Color/BLACK)
-      (.drawArc graphics inset inset (- width inset inset) (- height inset inset) 0 360)
-      (.setImage icon image)))
+    (.setImage icon (make-image colour)))
   (destroy [_]
     (.remove system-tray icon)))
 
@@ -47,8 +44,6 @@
     (Dorothy. icon)))
 
 (defn demo []
-  (doseq [icon (.getTrayIcons system-tray)]
-    (.remove system-tray icon))
   (let [dot (make-dot "Demonstration")
         counter (atom 20)]
     (.start (Thread. #(do
