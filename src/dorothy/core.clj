@@ -3,15 +3,21 @@
            (java.awt.image BufferedImage)))
 
 
-(def ^:private system-tray (when (SystemTray/isSupported) (SystemTray/getSystemTray)))
+(def ^:private system-tray
+  "The java.awt.SystemTray instance for the running JVM"
+  (when (SystemTray/isSupported) (SystemTray/getSystemTray)))
 
-(def ^:private icon-size (let [dimension (.getTrayIconSize system-tray)
+(def ^:private icon-size
+  "Width, height and inset for drawing icons."
+  (let [dimension (.getTrayIconSize system-tray)
                                width (int (.getWidth dimension))
                                height (int (.getHeight dimension))
                                inset 3]
                            [width height inset]))
 
-(defn- make-image [colour]
+(defn- make-image
+  "Create an image that can be used in a dot."
+  [colour]
   (let [[width height inset] icon-size
         image (BufferedImage. width height BufferedImage/TYPE_INT_ARGB)
         graphics (.getGraphics image)]
@@ -23,11 +29,13 @@
     image))
 
 (def ^:private empty-image
+  "A 'null object' for icon images."
   (make-image (Color. 0 0 0 0)))
 
 (defprotocol Dot
-  (paint [Dot colour])
-  (destroy [Dot]))
+  "Represents a mutable dot in the system tray."
+  (paint [Dot colour] "Repaint the dot with the given colour.")
+  (destroy [Dot] "Remove the dot from the system tray."))
 
 (deftype Dorothy [icon]
   Dot
@@ -36,7 +44,9 @@
   (destroy [_]
     (.remove system-tray icon)))
 
-(defn make-dot [tooltip]
+(defn make-dot
+  "Makes a dot and adds it to the system tray."
+  [tooltip]
   (let [menu (doto (PopupMenu.)
                (.add (MenuItem. "Nothing to see here.")))
         icon (TrayIcon. empty-image tooltip menu)]
