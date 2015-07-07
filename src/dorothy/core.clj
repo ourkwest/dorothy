@@ -14,13 +14,20 @@
   [[icon]]
   (.remove system-tray icon))
 
+(defn set-menu
+  "Set the menu on this dot."
+  [[_ popupmenu] & menuitems]
+  (.removeAll popupmenu)
+  (doseq [menuitem menuitems]
+    (.add popupmenu menuitem)))
+
 (defn make-dot
   "Makes a dot and adds it to the system tray."
   [tooltip]
   (let [popupmenu (PopupMenu.)
         icon (TrayIcon. empty-image tooltip popupmenu)]
     (.add system-tray icon)
-    [icon]))
+    [icon popupmenu]))
 
 (defn demo []
   (let [dot (make-dot "Demonstration")
