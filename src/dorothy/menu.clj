@@ -1,5 +1,5 @@
 (ns dorothy.menu
-  (:import (java.awt MenuItem)
+  (:import (java.awt MenuItem Menu)
            (java.awt.event ActionListener)))
 
 
@@ -14,3 +14,8 @@
         (actionPerformed [this action]
           (callback))))))
 
+(defn submenu [text & menuitems]
+  (let [parent (Menu. text)]
+    (doseq [child menuitems]
+      (.add parent child))
+    parent))

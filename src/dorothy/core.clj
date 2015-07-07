@@ -34,12 +34,13 @@
     (set-menu dot
               (dorothy.menu/label "Hello!")
               (dorothy.menu/divider)
-              (dorothy.menu/button "Paint red"
-                                   #(paint dot Color/RED))
-              (dorothy.menu/button "Paint green"
-                                   #(paint dot Color/GREEN))
-              (dorothy.menu/button "Paint blue"
-                                   #(paint dot Color/BLUE))
+              (dorothy.menu/submenu "Paint"
+                                    (dorothy.menu/button "Paint red"
+                                                         #(paint dot Color/RED))
+                                    (dorothy.menu/button "Paint green"
+                                                         #(paint dot Color/GREEN))
+                                    (dorothy.menu/button "Paint blue"
+                                                         #(paint dot Color/BLUE)))
               (dorothy.menu/divider)
               (dorothy.menu/button "Paint random"
                                    #(paint dot (Color. (rand-int (* 256 256 256)))))
