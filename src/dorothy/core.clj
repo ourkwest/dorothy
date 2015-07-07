@@ -30,14 +30,18 @@
     [icon popupmenu]))
 
 (defn demo []
-  (let [dot (make-dot "Demonstration")
-        counter (atom 20)]
-    (.start (Thread. #(do
-                       (Thread/sleep 3000)
-                       (while (< 0 (swap! counter dec))
-                         (Thread/sleep 200)
-                         (paint dot (rand-nth [Color/GREEN
-                                               Color/RED
-                                               (Color/decode "#FF99AA")
-                                               (Color. (rand-int (* 256 256 256)))])))
-                       (destroy dot))))))
+  (let [dot (make-dot "Demonstration")]
+    (set-menu dot
+              (dorothy.menu/label "Hello!")
+              (dorothy.menu/divider)
+              (dorothy.menu/button "Paint red"
+                                   #(paint dot Color/RED))
+              (dorothy.menu/button "Paint green"
+                                   #(paint dot Color/GREEN))
+              (dorothy.menu/button "Paint blue"
+                                   #(paint dot Color/BLUE))
+              (dorothy.menu/divider)
+              (dorothy.menu/button "Paint random"
+                                   #(paint dot (Color. (rand-int (* 256 256 256)))))
+              (dorothy.menu/divider)
+              (dorothy.menu/button "Exit" #(destroy dot)))))
