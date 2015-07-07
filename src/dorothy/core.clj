@@ -1,29 +1,26 @@
 (ns dorothy.core
   (:require [dorothy.system :refer [system-tray]]
             [dorothy.image :refer [make-image empty-image]])
-  (:import (java.awt TrayIcon Color MenuItem PopupMenu)))
+  (:import (java.awt TrayIcon Color PopupMenu)))
 
 
-(defprotocol Dot
-  "Represents a mutable dot in the system tray."
-  (paint [Dot colour] "Repaint the dot with the given colour.")
-  (destroy [Dot] "Remove the dot from the system tray."))
+(defn paint
+  "Repaint the dot with the given colour."
+  [[icon] colour]
+  (.setImage icon (make-image colour)))
 
-(deftype Dorothy [icon]
-  Dot
-  (paint [_ colour]
-    (.setImage icon (make-image colour)))
-  (destroy [_]
-    (.remove system-tray icon)))
+(defn destroy
+  "Remove the dot from the system tray."
+  [[icon]]
+  (.remove system-tray icon))
 
 (defn make-dot
   "Makes a dot and adds it to the system tray."
   [tooltip]
-  (let [menu (doto (PopupMenu.)
-               (.add (MenuItem. "Nothing to see here.")))
-        icon (TrayIcon. empty-image tooltip menu)]
+  (let [popupmenu (PopupMenu.)
+        icon (TrayIcon. empty-image tooltip popupmenu)]
     (.add system-tray icon)
-    (Dorothy. icon)))
+    [icon]))
 
 (defn demo []
   (let [dot (make-dot "Demonstration")
