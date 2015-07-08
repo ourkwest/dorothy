@@ -3,15 +3,15 @@
            (java.awt.event ActionListener)))
 
 
-(defn divider
-  "Creates a divider for a menu."
-  []
-  (MenuItem. "-"))
-
 (defn label
   "Creates a label for a menu."
   [text]
   (MenuItem. text))
+
+(defn divider
+  "Creates a divider for a menu."
+  []
+  (label "-"))
 
 (defn button
   "Creates a clickable label for a menu. When clicked, the supplied callback is run."
