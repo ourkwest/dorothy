@@ -3,18 +3,28 @@
            (java.awt.event ActionListener)))
 
 
-(defn divider [] (MenuItem. "-"))
+(defn divider
+  "Creates a divider for a menu."
+  []
+  (MenuItem. "-"))
 
-(defn label [text] (MenuItem. text))
+(defn label
+  "Creates a label for a menu."
+  [text]
+  (MenuItem. text))
 
-(defn button [text callback]
+(defn button
+  "Creates a clickable label for a menu. When clicked, the supplied callback is run."
+  [text callback]
   (doto (label text)
     (.addActionListener
       (reify ActionListener
         (actionPerformed [this action]
           (callback))))))
 
-(defn submenu [text & menuitems]
+(defn submenu
+  "Creates a labelled menu that can be nested in other menus."
+  [text & menuitems]
   (let [parent (Menu. text)]
     (doseq [child menuitems]
       (.add parent child))
