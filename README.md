@@ -1,0 +1,35 @@
+# dorothy
+
+"Somewhere over the rainbow... weigh a pie."
+
+A Clojure library to add dots to the system tray.
+
+## Usage
+
+```clojure
+(use 'dorothy.core) 
+=> nil
+
+(def my-dot (make-dot "My Dot"))
+=> #'user/my-dot
+(paint my-dot java.awt.Color/YELLOW)
+=> nil
+
+(use 'dorothy.menu) 
+=> nil
+(import java.awt.Color)
+=> java.awt.Color
+
+(set-menu my-dot
+          (label "Hello")
+          (divider)
+          (submenu "Pre-defined"
+                   (button "Red" #(paint my-dot Color/RED))
+                   (button "Green" #(paint my-dot Color/GREEN))
+                   (button "Blue" #(paint my-dot Color/BLUE)))
+          (divider)
+          (button "Random" #(paint my-dot (Color. (rand-int (* 256 256 256)))))
+          (divider)
+          (button "Go away!" #(destroy my-dot)))
+=> nil
+```
