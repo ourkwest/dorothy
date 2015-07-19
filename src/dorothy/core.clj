@@ -1,7 +1,7 @@
 (ns dorothy.core
   (:require [dorothy.system :refer [system-tray]]
             [dorothy.image :refer [make-image empty-image]])
-  (:import (java.awt TrayIcon Color PopupMenu)))
+  (:import (java.awt TrayIcon PopupMenu)))
 
 
 (defn paint

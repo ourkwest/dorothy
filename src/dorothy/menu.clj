@@ -1,6 +1,6 @@
 (ns dorothy.menu
-  (:import (java.awt MenuItem Menu)
-           (java.awt.event ActionListener)))
+  (:import (java.awt MenuItem Menu CheckboxMenuItem)
+           (java.awt.event ActionListener ItemListener)))
 
 
 (defn label
@@ -29,3 +29,13 @@
     (doseq [child menuitems]
       (.add parent child))
     parent))
+
+(defn checkbox
+  [text state callback]
+  (let [item (CheckboxMenuItem. text state)
+        fn #(callback (.getState item))]
+    (.addItemListener item
+      (reify ItemListener
+        (itemStateChanged [this itemEvent]
+          (fn))))
+    item))
