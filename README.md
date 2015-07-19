@@ -33,3 +33,7 @@ A Clojure library to add dots to the system tray.
           (button "Go away!" #(destroy my-dot)))
 => nil
 ```
+
+## License
+
+Distributed under the Eclipse Public License, the same as Clojure.
