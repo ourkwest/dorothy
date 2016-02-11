@@ -6,8 +6,10 @@ A Clojure library to add dots to the system tray.
 
 ## Usage
 
+Leiningen coordinates:
 ```[cotton/dorothy "1.0.1"]```
 
+Example usage:
 ```clojure
 (use 'dorothy.core) 
 => nil
@@ -27,8 +29,8 @@ A Clojure library to add dots to the system tray.
           (divider)
           (submenu "Pre-defined"
                    (button "Red" #(paint my-dot Color/RED))
-                   (button "Green" #(paint my-dot Color/GREEN))
-                   (button "Blue" #(paint my-dot Color/BLUE)))
+                   (button "Light Green" #(paint my-dot 0x88FF88))
+                   (button "Banana" #(paint my-dot :banana)))
           (divider)
           (button "Random" #(paint my-dot (Color. (rand-int (* 256 256 256)))))
           (divider)
