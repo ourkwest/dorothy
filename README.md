@@ -6,6 +6,8 @@ A Clojure library to add dots to the system tray.
 
 ## Usage
 
+```[cotton/dorothy "1.0.1"]```
+
 ```clojure
 (use 'dorothy.core) 
 => nil
