@@ -36,4 +36,6 @@ A Clojure library to add dots to the system tray.
 
 ## License
 
-Distributed under the Eclipse Public License, the same as Clojure.
+Code distributed under the Eclipse Public License, the same as Clojure.
+
+Emoji provided free by [Emoji One](http://emojione.com/) under [Creative Commons 4.0](https://creativecommons.org/licenses/by/4.0/legalcode).
