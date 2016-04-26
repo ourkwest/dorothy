@@ -2,7 +2,7 @@
 
 "Somewhere over the rainbow... weigh a pie."
 
-A Clojure library to add dots to the system tray.
+A Clojure library to add coloured dots (or emoji) to the system tray.
 
 ## Usage
 
@@ -30,7 +30,7 @@ Example usage:
           (submenu "Pre-defined"
                    (button "Red" #(paint my-dot Color/RED))
                    (button "Light Green" #(paint my-dot 0x88FF88))
-                   (button "Banana" #(paint my-dot :banana)))
+                   (button "Rainbow" #(paint my-dot :rainbow)))
           (divider)
           (button "Random" #(paint my-dot (Color. (rand-int (* 256 256 256)))))
           (divider)
