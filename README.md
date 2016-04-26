@@ -7,7 +7,7 @@ A Clojure library to add dots to the system tray.
 ## Usage
 
 Leiningen coordinates:
-```[cotton/dorothy "1.0.1"]```
+```[cotton/dorothy "1.0.2"]```
 
 Example usage:
 ```clojure
