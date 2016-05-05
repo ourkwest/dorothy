@@ -1625,3 +1625,12 @@
    :zero                            "0030-20e3"
    :zipper_mouth                    "1f910"
    :zzz                             "1f4a4"})
+
+(defn create-lookup-page []
+  (->> (for [[k v] emoji-lookup]
+         (str "![" (name k) " emoji](resources/png/" v ".png?raw=true \"" (name k) "\") " k " <br/>"))
+       sort
+       (cons "# Emoji Lookup\n")
+       (interpose "\n")
+       (apply str)
+       (spit "lookup.md")))
