@@ -1,11 +1,10 @@
 (ns dorothy.image
   (:require [dorothy.system :refer [system-tray]]
-            [dorothy.lookup :refer [emoji-lookup]])
+            [dorothy.lookup :refer [emoji-lookup]]
+            [clojure.java.io :as io])
   (:import (java.awt Color RenderingHints)
            (java.awt.image BufferedImage)
-           (javax.imageio ImageIO)
-           (java.net URL)
-           (java.io File)))
+           (javax.imageio ImageIO)))
 
 
 (def ^:private icon-size
@@ -69,10 +68,7 @@
   "A 'null object' for icon images."
   (make-image (Color. 0 0 0 0)))
 
-
 (defn get-image [name]
-  (let [filename (str "./resources/png/" (emoji-lookup name) ".png")
-        file (File. filename)]
-    (println filename)
-    (println file)
-    (ImageIO/read file)))
+  (let [resource (io/resource (str "png/" (emoji-lookup name) ".png"))]
+    (println resource)
+    (ImageIO/read resource)))
