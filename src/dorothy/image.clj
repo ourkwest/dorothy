@@ -4,7 +4,8 @@
             [clojure.java.io :as io])
   (:import (java.awt Color RenderingHints)
            (java.awt.image BufferedImage)
-           (javax.imageio ImageIO)))
+           (javax.imageio ImageIO)
+           (java.io File)))
 
 
 (def ^:private icon-size
@@ -68,7 +69,7 @@
   "A 'null object' for icon images."
   (make-image (Color. 0 0 0 0)))
 
-(defn get-image [name]
-  (let [resource (io/resource (str "png/" (emoji-lookup name) ".png"))]
-    (println resource)
-    (ImageIO/read resource)))
+(defn get-image
+  "Load an emoji image by name."
+  [name]
+  (ImageIO/read (io/resource (str "png" File/separator (emoji-lookup name) ".png"))))
