@@ -38,6 +38,8 @@ Example usage:
 => nil
 ```
 
+There's a lookup page for the emoji [here](lookup.md).
+
 ## License
 
 Code distributed under the Eclipse Public License, the same as Clojure.

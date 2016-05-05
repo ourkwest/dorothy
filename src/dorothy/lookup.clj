@@ -1630,6 +1630,8 @@
   (->> (for [[k v] emoji-lookup]
          (str "![" (name k) " emoji](resources/png/" v ".png?raw=true \"" (name k) "\") " k " <br/>"))
        sort
+       (cons "Emoji provided free by [Emoji One](http://emojione.com/)
+              under [Creative Commons 4.0](https://creativecommons.org/licenses/by/4.0/legalcode).\n")
        (cons "# Emoji Lookup\n")
        (interpose "\n")
        (apply str)

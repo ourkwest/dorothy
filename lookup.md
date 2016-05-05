@@ -1,5 +1,8 @@
 # Emoji Lookup
 
+Emoji provided free by [Emoji One](http://emojione.com/) 
+              under [Creative Commons 4.0](https://creativecommons.org/licenses/by/4.0/legalcode).
+
 ![100 emoji](resources/png/1f4af.png?raw=true "100") :100 <br/>
 ![1234 emoji](resources/png/1f522.png?raw=true "1234") :1234 <br/>
 ![8ball emoji](resources/png/1f3b1.png?raw=true "8ball") :8ball <br/>
