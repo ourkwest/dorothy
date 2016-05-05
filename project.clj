@@ -1,4 +1,4 @@
-(defproject cotton/dorothy "1.0.2"
+(defproject cotton/dorothy "1.1"
   :description "A library to add clickable dots to the system tray."
   :url "https://github.com/peterwestmacott/dorothy"
   :license {:name "Eclipse Public License"
