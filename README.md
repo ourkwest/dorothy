@@ -30,7 +30,7 @@ Example usage:
           (submenu "Pre-defined"
                    (button "Red" #(paint my-dot Color/RED))
                    (button "Light Green" #(paint my-dot 0x88FF88))
-                   (button "Rainbow" #(paint my-dot :rainbow)))
+                   (button "Rainbow" #(paint my-dot :nail_care_tone5)))
           (divider)
           (button "Random" #(paint my-dot (Color. (rand-int (* 256 256 256)))))
           (divider)
