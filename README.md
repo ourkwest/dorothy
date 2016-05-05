@@ -7,7 +7,7 @@ A Clojure library to add coloured dots (or emoji) to the system tray.
 ## Usage
 
 Leiningen coordinates:
-```[cotton/dorothy "1.0.2"]```
+```[cotton/dorothy "1.1.0"]```
 
 Example usage:
 ```clojure
